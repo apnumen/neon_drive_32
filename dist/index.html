@@ -155,7 +155,7 @@ header .logo{transform:translateX(calc(-50% + 5px))}
 .board-dialog td{padding:13px 3px;border-bottom:1px solid #e26bba26;text-shadow:0 0 8px #ff63c644}
 .board-dialog td:first-child{color:#ac83aa}
 .board-dialog td:last-child{text-shadow:0 0 10px #66deed55}
-.board-dialog tbody tr:first-child{background:radial-gradient(ellipse at center,#ff53b517,transparent 75%);animation:leader-glow 4s ease-in-out infinite}
+.board-dialog tbody tr:first-child{background:linear-gradient(90deg,transparent 0%,#ff53b51a 35%,#ff53b51a 65%,transparent 100%)}
 .board-dialog tbody tr:first-child td{color:#ffbbdf;text-shadow:0 0 12px #ff55ad66}
 #player-name{font-family:NeonArcade,Score,sans-serif;letter-spacing:1px}#name-limit{font-size:11px;margin:7px 0 0;color:#bd93af}
 @media(max-width:370px){.board-dialog{padding:23px 14px}.board-dialog table{font-size:12px}.board-dialog th:last-child{width:78px}}
@@ -167,9 +167,7 @@ header .logo{transform:translateX(calc(-50% + 5px))}
 #leaderboard-dialog td{padding:6px 3px;font-family:NeonArcade,Score,sans-serif;font-size:inherit;letter-spacing:.3px}
 #leaderboard-dialog .neon{margin-top:8px}
 #leaderboard-message:empty{display:none}
-@keyframes leader-glow{0%,100%{background-color:#ff59b500}50%{background-color:#ff59b50f}}
 @media(max-height:600px){#leaderboard-dialog{padding:14px 18px}#leaderboard-dialog td{padding-top:4px;padding-bottom:4px}}
-@media(prefers-reduced-motion:reduce){.board-dialog tbody tr:first-child{animation:none}}
 </style></head><body><canvas id="world" aria-label="A neon sports car driving towards a striped sunset"></canvas><div id="vignette"></div><div class="vhs" aria-hidden="true"><div class="tracking"></div></div><header><h1 class="logo" aria-label="32"><svg viewBox="-15 -20 1800 800" aria-hidden="true"><defs>
 <linearGradient id="silver32" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7fbff"/><stop offset=".18" stop-color="#b5c4d3"/><stop offset=".36" stop-color="#f4faff"/><stop offset=".47" stop-color="#8c9cab"/><stop offset=".495" stop-color="#253446"/><stop offset=".515" stop-color="#090f1b"/><stop offset=".54" stop-color="#e4f4ff"/><stop offset=".72" stop-color="#93acbe"/><stop offset=".9" stop-color="#edf8ff"/><stop offset="1" stop-color="#617a90"/></linearGradient>
 <linearGradient id="bevel32" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#c1e1f7"/><stop offset=".6" stop-color="#344657"/><stop offset="1" stop-color="#cae6fa"/></linearGradient>

@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100720"><title>32 — Neon Drive</title><meta name="description" content="An endless summer night. Tap start and drive into the neon."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23100720'/%3E%3Ctext x='5' y='46' font-family='sans-serif' font-weight='900' font-size='42' fill='%23ff57b9'%3E32%3C/text%3E%3C/svg%3E"><style>
+:root{color-scheme:dark;--pink:#ff48b6;--cyan:#75f7ff;--ink:#100720}*{box-sizing:border-box}body{margin:0;background:var(--ink);color:#fff4ff;font-family:Arial,Helvetica,sans-serif}button{font:inherit;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}button:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}button:active{transform:scale(.96)}[hidden]{display:none!important}#world{position:fixed;inset:0;width:100%;height:100%;display:block}#vignette{position:fixed;inset:0;pointer-events:none;background:linear-gradient(#10072044,transparent 25%,transparent 65%,#090615 100%);box-shadow:inset 0 0 90px #10072055}header{position:fixed;top:max(24px,env(safe-area-inset-top));left:26px;right:26px;display:flex;justify-content:space-between;align-items:flex-start}.logo{font-size:72px;line-height:.85;font-weight:950;font-style:italic;letter-spacing:-7px;transform:skew(-9deg);background:linear-gradient(#fff 10%,#b4deff 34%,#4d539a 48%,#ffb8eb 51%,#ff4cae 75%,#9e1b8a);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #46184c) drop-shadow(0 0 16px #ff258e55)}.micro{font:10px/1.6 monospace;letter-spacing:3px;text-transform:uppercase;color:#e1b9e1}.sound{border:1px solid #e599d455;background:#170d2ab0;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;font-size:18px}#landing{position:fixed;bottom:max(34px,env(safe-area-inset-bottom));left:26px;right:26px;text-align:center}.eyebrow{font:10px monospace;letter-spacing:4px;color:#e3a9d5;margin-bottom:13px}h1{font-size:clamp(25px,7vw,36px);font-weight:500;letter-spacing:1px;margin:0 0 8px}p{color:#c9b1ce;line-height:1.6;font-size:13px;margin:0 0 24px}.primary{width:100%;height:58px;border:1px solid #ffa0df;border-radius:4px;background:linear-gradient(120deg,#fa379b,#af38d2);box-shadow:0 0 26px #fa379b33,inset 0 1px #ffffff44;font-size:13px;font-weight:bold;letter-spacing:5px;text-transform:uppercase}.secondary{margin-top:12px;height:45px;border:0;background:transparent;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#edcbe9}.secondary span{margin-right:10px}#hud{position:fixed;top:max(29px,env(safe-area-inset-top));right:26px;text-align:right}#distance{font-size:28px;font-family:monospace;letter-spacing:2px}#stop{margin-top:12px;border:1px solid #e599d466;background:#170d2abb;padding:12px 20px;border-radius:3px;font:11px monospace;letter-spacing:2px}#controls{position:fixed;bottom:max(30px,env(safe-area-inset-bottom));left:26px;right:26px;display:flex;justify-content:space-between;align-items:center}#controls button{width:90px;height:66px;border:1px solid #f482cc88;border-radius:5px;background:linear-gradient(#58214c99,#221127dd);font-size:30px;box-shadow:0 0 18px #ff38931a}.control-note{font:9px/2 monospace;letter-spacing:2px;color:#d0a7d0;text-align:center}#result{position:fixed;inset:0;background:#0b071b88;backdrop-filter:blur(5px);display:grid;align-items:center;padding:30px}#result section{text-align:center}#result h2{font-size:38px;font-weight:500;margin:12px 0}#result strong{display:block;font:48px monospace;color:var(--cyan);margin:18px}dialog{background:#1d102d;border:1px solid #e756a2;border-radius:8px;color:#fff;padding:30px;max-width:calc(100vw - 48px);width:340px;text-align:center;box-shadow:0 0 65px #b2247055}dialog::backdrop{background:#080310bb;backdrop-filter:blur(7px)}dialog h2{font-size:24px;font-weight:500}dialog p{margin-bottom:24px}#device{display:none;position:fixed;inset:0;align-items:center;justify-content:center;text-align:center;padding:32px;background:#10072055;backdrop-filter:blur(3px)}#device section{max-width:420px}#device h2{font-weight:400;font-size:32px;line-height:1.3}#device .logo{font-size:100px;display:block;margin-bottom:36px}#device button{border:1px solid #ff86c6;padding:17px 28px;background:#5b204766;border-radius:4px;font-size:11px;letter-spacing:3px}#rotate{display:none}.paused-scene{position:fixed;left:26px;bottom:12px;background:none;border:0;color:#9d789e;font:9px monospace;letter-spacing:1px} @media (min-width:768px){#world{left:50%;width:500px;transform:translateX(-50%)}header{left:calc(50% - 224px);right:calc(50% - 224px)}#landing,#controls{left:calc(50% - 224px);right:calc(50% - 224px)}#hud{right:calc(50% - 224px)}#result section{width:100%;max-width:448px;margin:auto}.paused-scene{left:calc(50% - 224px)}}@media (max-width:767px) and (orientation:landscape) and (pointer:coarse){#device{display:flex}#desktop{display:none}#rotate{display:block}header,#landing,#controls,#hud,#result,.paused-scene{display:none!important}}@media(max-height:690px){#landing{bottom:20px}#landing p{margin-bottom:14px}h1{font-size:25px}.eyebrow{margin-bottom:8px}header .logo{font-size:58px}.primary{height:50px}}
+.vhs{position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.35;background:repeating-linear-gradient(0deg,#08031955 0px,#08031955 1px,transparent 1px,transparent 3px);box-shadow:inset 2px 0 #ff246640,inset -2px 0 #44eeff35}.vhs:before{content:"";position:absolute;inset:-15%;opacity:.13;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.93' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.8' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .28s steps(2) infinite}.tracking{position:absolute;left:0;right:0;height:60px;background:linear-gradient(transparent,#eed9ff15,transparent);animation:tracking 11s linear infinite}#world{filter:drop-shadow(1px 0 0 #ff255b33) drop-shadow(-1px 0 0 #32dfff22)}@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-3%,2%)}66%{transform:translate(2%,-3%)}}@keyframes tracking{from{top:-15%}to{top:115%}}@media(prefers-reduced-motion:reduce){.vhs:before,.tracking{animation:none}.tracking{display:none}}dialog{z-index:101}
+/* Keep the CSS surface identical to the canvas coordinate system at every width. */
+#world{inset:auto;top:0;left:50%;width:min(100vw,500px);height:100dvh;transform:translateX(-50%)}
+header,#landing,#controls{left:max(26px,calc((100vw - 448px)/2));right:max(26px,calc((100vw - 448px)/2))}
+#hud{right:max(26px,calc((100vw - 448px)/2))}
+.paused-scene{left:max(26px,calc((100vw - 448px)/2))}
+
+/* Arcade controls: cut metal frames, dark keys, illuminated edges. */
+header{display:block;pointer-events:none;top:max(24px,env(safe-area-inset-top));height:92px}
+header .logo{position:absolute;left:50%;top:0;margin:0;width:164px;height:82px;transform:translateX(-50%);background:none;color:inherit;filter:drop-shadow(0 0 12px #ff35ac55);font-size:initial;letter-spacing:normal}
+.logo svg{display:block;width:100%;height:100%;overflow:visible}
+.utilities{position:absolute;right:-8px;top:4px;display:flex;flex-direction:column;gap:10px;pointer-events:auto}
+.utility{display:grid;place-items:center;width:42px;height:42px;min-height:42px;padding:0;border:1px solid #9a588775;border-radius:0;background:#140c2380;color:#d6aaca;font:20px monospace;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px)}
+#landing{display:flex;align-items:center;flex-direction:column;gap:16px;bottom:max(38px,env(safe-area-inset-bottom))}
+.neon,#controls button,#stop{--edge:#ff4cbd;--shine:#ffc0e9;--cut:13px;position:relative;isolation:isolate;display:grid;place-items:center;background:transparent;border:0;border-radius:0;box-shadow:none;min-height:56px;padding:0 28px;color:#fff0fb;font-family:monospace;font-size:15px;font-weight:600;letter-spacing:4px;text-transform:uppercase;filter:drop-shadow(0 0 6px #ff34a655);transition:filter .16s,transform .12s}
+.neon:before,.neon:after{content:"";position:absolute;z-index:-1;pointer-events:none;clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+.neon:before{inset:0;background:linear-gradient(125deg,var(--shine),var(--edge) 25%,#752956 56%,var(--edge) 80%,var(--shine))}
+.neon:after{inset:2px;background:linear-gradient(170deg,#2e1433,#100d20 55%,#20102c);box-shadow:inset 0 0 22px #ff3dbb1c}
+.neon span{display:flex;align-items:center;justify-content:center;gap:16px;position:relative;text-shadow:0 0 10px var(--edge)}
+.neon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+.neon:hover{filter:drop-shadow(0 0 12px #ff36b28c);color:white}
+.neon:active{transform:translateY(2px);filter:drop-shadow(0 0 18px var(--edge))}
+.neon:active:after{background:#44203f}
+.neon:focus-visible{outline:2px solid #fff0fb;outline-offset:5px}
+#start{width:min(100%,320px);height:66px;font-size:19px;letter-spacing:6px}
+#start svg{width:23px;height:23px;fill:#ffb3e0}
+.neon.secondary{--edge:#48dbe9;--shine:#b1f6ff;width:min(100%,270px);min-height:50px;height:50px;margin:0;font-size:12px;letter-spacing:3px;filter:drop-shadow(0 0 5px #33c9e53d);color:#b7eef5}
+.neon.secondary:after{background:linear-gradient(170deg,#112531,#0c101f 70%)}
+#hud{top:max(30px,env(safe-area-inset-top));display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+#distance{font-size:20px;letter-spacing:1px;color:#eec9e5;text-shadow:0 0 9px #fe52bd}
+#stop{margin:0;min-height:44px;padding:0 12px;font-size:11px;letter-spacing:2px;--cut:8px}
+#controls{bottom:max(38px,env(safe-area-inset-bottom))}
+#controls button{width:94px;height:66px;font-size:33px;padding:0;--edge:#6de6f4;--shine:#d3fbff;filter:drop-shadow(0 0 8px #28c5ee44)}
+#controls button:after{background:linear-gradient(145deg,#153344,#0e1023 65%)}
+#result section{display:flex;flex-direction:column;align-items:center;gap:14px}
+#result h2{font-size:28px;margin:0}#result strong{font-size:40px;margin:0}#result p{font-size:12px;margin:0 0 10px}
+#result .primary{max-width:320px}dialog .primary{height:54px}
+dialog{border-radius:0;background:#110e23;border-color:#ff66c6;box-shadow:0 0 35px #c83b8640}
+@media(max-width:359px){header .logo{width:140px}.utilities{right:-9px}}
+@media(max-height:600px){header .logo{width:128px;height:64px}#landing{gap:10px;bottom:20px}#start{height:54px}.neon.secondary{height:44px;min-height:44px}}
+@media(prefers-reduced-motion:reduce){.neon{transition:none}}
+
+
+@font-face{font-family:Score;src:url('fonts/score-bold.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:Score;src:url('fonts/score-regular.otf') format('opentype');font-weight:400;font-display:swap}
+#result #score{display:flex;justify-content:center;align-items:baseline;gap:10px;margin:0;font-family:Score,Arial,sans-serif;font-weight:700;font-style:normal;font-variant-numeric:tabular-nums;line-height:1;color:#bcf8ff;letter-spacing:0;text-shadow:0 0 20px #2edcf640}
+.score-value{font-size:clamp(64px,18vw,84px)}.score-unit{font-size:26px;font-weight:400;color:#7dbcc8}
+#result #best{display:flex;align-items:baseline;justify-content:center;gap:9px;margin:2px 0 24px;font-family:Score,Arial,sans-serif;font-weight:400;line-height:1.2;color:#d4b5d2}
+.best-label{font-size:15px;letter-spacing:2px;color:#b08ea9}.best-value{font-size:25px;font-weight:700;letter-spacing:.5px;font-variant-numeric:tabular-nums}.best-unit{font-size:17px}
+
+@font-face{font-family:Afterglow;src:url('fonts/afterglow-display.ttf?v=3') format('truetype');font-weight:400 900;font-style:normal;font-display:swap}
+#result #score,#result #best{font-family:Afterglow,sans-serif;font-weight:400}
+.score-value{font-size:clamp(42px,12vw,62px);padding:4px 10px 4px 0;line-height:1.15;letter-spacing:-2px;background:linear-gradient(#f9f1ff 10%,#85e9fb 42%,#23738e 49%,#fdb7e8 52%,#ed60bd 82%,#9b3c91);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3f184d) drop-shadow(0 0 9px #e745a93a)}
+.score-unit{font-family:Afterglow,sans-serif;font-size:17px;color:#d49ac9}
+#result #best{gap:10px;margin-top:8px}
+.best-label{font-size:12px;letter-spacing:1px;color:#e791c9}.best-value{font-size:19px;letter-spacing:0;color:#b6f6ff}.best-unit{font-size:11px;color:#c18bbb}
+
+/* Pink-chrome title lettering and matching arcade labels. */
+header .logo{width:186px;height:93px;filter:drop-shadow(0 2px 0 #8c125a) drop-shadow(0 0 13px #ff149b75)}
+.neon span{font-family:Afterglow,sans-serif;font-weight:400;letter-spacing:0}
+.neon span b{font-weight:400;display:inline-block;padding:5px 5px 5px 0;background:linear-gradient(#fff6ff 10%,#ffb5e8 40%,#98215f 49%,#ffd3f4 52%,#ff4fbd 80%,#ec198b);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 1px 0 #7d175d) drop-shadow(0 0 7px #ff189944)}
+#start{font-size:23px;--edge:#ff28ab;--shine:#ffe8fb;filter:drop-shadow(0 0 10px #ff189b65)}
+#start:after{background:linear-gradient(170deg,#4b143b,#1c0d25 52%,#30102e)}
+#start svg{fill:#ffc4ea;filter:drop-shadow(0 0 5px #ff2fbb)}
+.neon.secondary{--edge:#f55cc3;--shine:#ffbde9;color:#f8acd9;filter:drop-shadow(0 0 7px #ff2cb54d);font-size:17px}
+.neon.secondary:after{background:linear-gradient(170deg,#31102f,#130d22 70%)}
+#retry{font-size:20px;letter-spacing:0}#home,#close{font-family:Afterglow,sans-serif;font-size:15px;letter-spacing:0}
+#stop span{font-size:10px}
+#controls button span{font-family:Arial,sans-serif}
+@media(max-width:359px){header .logo{width:158px;height:79px}}
+@media(max-height:600px){header .logo{width:142px;height:71px}}
+
+/* Tight score pairing, proper TA/TO kerning, fixed utility placement. */
+#result #score{transform:translateY(12px)}
+#result #best{margin-top:0}
+.neon span,.neon span b{font-kerning:normal;font-feature-settings:"kern" 1;letter-spacing:0}
+header .logo{width:190px;height:88px;filter:drop-shadow(0 3px 1px #060c1e) drop-shadow(0 0 12px #9ddcff25)}
+.utilities{left:0;right:auto!important}
+#sound{color:#d5effb;border-color:#6b8fa877;background:#0e172487}
+@media(max-width:359px){header .logo{width:154px;height:75px}}
+@media(max-height:600px){header .logo{width:144px;height:68px}}
+
+/* Center the actual ink, accounting for the oblique font's trailing bearings. */
+.neon>span{width:max-content;max-width:100%;gap:0}
+.neon span b{padding:5px 0}
+#start>span{transform:translateX(.094em)}
+.album>span{transform:translateX(.05em)}
+#retry>span{transform:translateX(.04em)}
+#home>span,#close>span{transform:translateX(.02em)}
+#stop>span{gap:8px;transform:translateX(.025em)}
+.stop-mark{font:normal 12px Arial,sans-serif;line-height:1;color:#ffd0ec}
+#controls button>span{transform:none}
+
+.utilities{left:0;right:0!important;top:4px;display:block;pointer-events:none}
+.utilities>button{pointer-events:auto;position:absolute;top:0}
+#stop{left:0;right:auto;min-height:42px;height:42px}
+#sound{right:0;left:auto}
+#hud{top:max(86px,calc(env(safe-area-inset-top) + 58px))}
+dialog#album{width:340px;padding:38px 28px 26px;border:1px solid #ff8bdb;background:linear-gradient(155deg,#351432 0%,#140d26 48%,#17132e);box-shadow:0 0 0 4px #280d2d,0 0 35px #f029a63d;overflow:visible}
+dialog#album:before{content:"";position:absolute;top:-1px;left:25px;right:25px;height:3px;background:linear-gradient(90deg,transparent,#ff6cc8,#c3faff,#ff6cc8,transparent);box-shadow:0 0 13px #fc4fbf}
+dialog#album h2{font-family:Afterglow,sans-serif;font-size:20px;font-weight:400;line-height:1.4;letter-spacing:0;text-transform:uppercase;color:#ffc4eb;text-shadow:0 0 15px #ff3aa96b;margin:0 0 30px}
+dialog#album .primary{min-height:48px;height:48px;--cut:11px}
+
+#speedometer{width:100px;height:66px;position:relative;flex:0 0 100px;align-self:center;text-align:center;pointer-events:none}
+#speedometer svg{position:absolute;inset:0;width:100%;height:42px;overflow:visible;fill:none;stroke-width:2;stroke-linecap:square}
+.speed-track{stroke:#67355e}#speed-arc{stroke:#ff64c9;stroke-dasharray:0 100;filter:drop-shadow(0 0 3px #ff39b7)}
+.speed-reading{position:absolute;left:0;right:0;top:20px;display:flex;flex-direction:column;align-items:center;gap:3px}
+#speed-value{font:400 25px/1 Afterglow,sans-serif;font-variant-numeric:tabular-nums;color:#d8faff;text-shadow:0 0 9px #72dbed44;transform:translateX(1px)}
+.speed-reading>span{font:10px/1 Arial,sans-serif;letter-spacing:2px;color:#d5a5ce}
+@media(max-width:359px){#controls button{width:76px}#speedometer{width:90px;flex-basis:90px}#speed-value{font-size:23px}}
+
+
+@font-face{font-family:AfterglowSpeed;src:url('fonts/afterglow-speed.ttf') format('truetype');font-display:swap}
+#speed-value{font-family:AfterglowSpeed,sans-serif;font-variant-numeric:normal;letter-spacing:0;transform:none;min-width:3em;text-align:center;font-size:26px}
+@media(max-width:359px){#speed-value{font-size:24px}}
+
+/* Apply the corrected proportional digit metrics to result and personal best too. */
+#result .score-value,#result .best-value{font-family:AfterglowSpeed,sans-serif;font-variant-numeric:normal;letter-spacing:0;font-weight:400}
+#result .score-value{padding:4px 0;white-space:nowrap}
+
+/* Stable small viewport prevents road jumps when mobile browser bars collapse. */
+#world{height:100svh;filter:none}
+.vhs:before{inset:0;background-image:url('assets/grain.png');opacity:.22;animation:none}
+.tracking{top:0;will-change:transform;animation:tracking-smooth 11s linear infinite}
+@keyframes tracking-smooth{from{transform:translateY(-65px)}to{transform:translateY(100svh)}}
+@media(pointer:coarse){header .logo{width:126px;height:58px}.vhs{opacity:.26}}
+@media(prefers-reduced-motion:reduce){.tracking{animation:none}}
+
+/* Optical correction for the right-leaning chrome numerals. */
+header .logo{transform:translateX(calc(-50% + 5px))}
+
+#leaderboard-open{right:0;left:auto;top:52px}
+#leaderboard-open svg{width:23px;height:23px;fill:none;stroke:#f7b4df;stroke-width:1.5;stroke-linejoin:round}
+.board-dialog{width:min(390px,calc(100vw - 32px));max-width:none;max-height:80svh;overflow:auto;padding:26px 22px;border:1px solid #ff82ce;background:linear-gradient(150deg,#30142f,#110e23 60%);box-shadow:0 0 32px #e42c9440}
+.board-dialog h2{font:400 25px Afterglow,sans-serif;color:#ffc3e8;letter-spacing:0;margin:0 0 20px}
+.board-dialog p{font:14px/1.5 Arial,sans-serif;margin:12px 0;color:#d4b5cf}
+.board-dialog table{width:100%;border-collapse:collapse;font:15px/1.4 Arial,sans-serif;text-align:left;margin:14px 0 20px}
+.board-dialog th{font-size:12px;color:#b78ba9;font-weight:400}.board-dialog th,.board-dialog td{padding:10px 4px;border-bottom:1px solid #dd6db52a;overflow-wrap:anywhere}
+.board-dialog th:last-child,.board-dialog td:last-child{text-align:right;white-space:nowrap;color:#aeeff7;font-variant-numeric:tabular-nums}
+.board-dialog tr:first-child td{color:#ffc0e6}.board-dialog .neon{margin:12px auto 0;max-width:100%;font:400 14px Afterglow,sans-serif;letter-spacing:0}
+#name-score{font:400 26px AfterglowSpeed,sans-serif;color:#b5f7ff;display:block;margin:18px 0}
+#name-form label{display:block;text-align:left;font:14px Arial,sans-serif;margin-bottom:8px}
+#player-name{width:100%;padding:13px 12px;border:1px solid #c76fa6;border-radius:0;background:#110d21;color:#fff0f9;font:16px Arial,sans-serif}
+#player-name:focus{outline:2px solid #7fe5f3;outline-offset:2px}#name-error{color:#ffafcf;min-height:1em}
+#name-submit:disabled{opacity:.5;cursor:wait}#leaderboard-status{max-width:300px;font:13px/1.4 Arial,sans-serif;color:#d0b5cc}
+</style></head><body><canvas id="world" aria-label="A neon sports car driving towards a striped sunset"></canvas><div id="vignette"></div><div class="vhs" aria-hidden="true"><div class="tracking"></div></div><header><h1 class="logo" aria-label="32"><svg viewBox="-15 -20 1800 800" aria-hidden="true"><defs>
+<linearGradient id="silver32" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7fbff"/><stop offset=".18" stop-color="#b5c4d3"/><stop offset=".36" stop-color="#f4faff"/><stop offset=".47" stop-color="#8c9cab"/><stop offset=".495" stop-color="#253446"/><stop offset=".515" stop-color="#090f1b"/><stop offset=".54" stop-color="#e4f4ff"/><stop offset=".72" stop-color="#93acbe"/><stop offset=".9" stop-color="#edf8ff"/><stop offset="1" stop-color="#617a90"/></linearGradient>
+<linearGradient id="bevel32" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#c1e1f7"/><stop offset=".6" stop-color="#344657"/><stop offset="1" stop-color="#cae6fa"/></linearGradient>
+</defs><g transform="translate(0 725) scale(1 -1)"><g fill="#172c40" stroke="#090e1d" stroke-width="26" stroke-linejoin="bevel" transform="translate(9 -23)"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g><g fill="url(#silver32)" stroke="url(#bevel32)" stroke-width="13" stroke-linejoin="bevel"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g></g>
+<path d="M620 118h36m-18-18v36" stroke="#e6f8ff" stroke-width="5" opacity=".85"/></svg></h1><div class="utilities"><button class="utility sound" id="sound" aria-label="Turn music on" title="Music">♫</button><button id="leaderboard-open" class="utility" aria-label="Leaderboard" title="Leaderboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v6a5 5 0 0 1-10 0z M7 5H3v3a4 4 0 0 0 5 4 M17 5h4v3a4 4 0 0 1-5 4 M12 14v6 M8 21h8"/></svg></button><button id="stop" hidden class="neon"><span><i class="stop-mark" aria-hidden="true">Ⅱ</i><b>Stop</b></span></button></div></header><main id="landing"><button id="start" class="neon primary"><span><b>Start</b></span></button><button class="neon secondary album"><span><b>Photos</b></span></button></main><aside id="hud" hidden><div id="distance" aria-label="Distance in metres">00000</div></aside><nav id="controls" aria-label="Driving controls" hidden><button id="left" class="neon" aria-label="Move left"><span>←</span></button><div id="speedometer" aria-label="Speed 60 miles per hour"><svg viewBox="0 0 100 42" aria-hidden="true"><path class="speed-track" d="M8 36A43 43 0 0 1 92 36"/><path id="speed-arc" d="M8 36A43 43 0 0 1 92 36" pathLength="100"/></svg><div class="speed-reading"><strong id="speed-value">60</strong><span>MPH</span></div></div><button id="right" class="neon" aria-label="Move right"><span>→</span></button></nav><div id="result" hidden><section aria-label="Ride result"><strong id="score"><span class="score-value">0</span><span class="score-unit">m</span></strong><p id="best"></p><p id="leaderboard-status" role="status" hidden></p><button class="neon primary" id="retry"><span><b>Try again</b></span></button><button class="neon secondary" id="home"><span>Back</span></button></section></div><div id="device"><section id="rotate"><div style="font-size:50px">↻</div><h2>Keep it vertical.</h2><p>Rotate your phone to chase the sunset.</p></section></div><dialog id="album" aria-labelledby="album-title"><h2 id="album-title">Coming Soon</h2><button class="neon primary" id="close"><span>Back</span></button></dialog><dialog id="leaderboard-dialog" class="board-dialog" aria-labelledby="board-title"><h2 id="board-title">TOP 10</h2><p id="leaderboard-message" role="status"></p><table><thead><tr><th scope="col">#</th><th scope="col">Driver</th><th scope="col">Best</th></tr></thead><tbody id="leaderboard-rows"></tbody></table><button class="neon secondary" id="leaderboard-close"><span>Back</span></button></dialog><dialog id="name-dialog" class="board-dialog" aria-labelledby="name-title"><h2 id="name-title">TOP 10</h2><p>Your ride made the leaderboard.</p><strong id="name-score"></strong><form id="name-form"><label for="player-name">Your name</label><input id="player-name" name="name" maxlength="40" autocomplete="nickname" required><p id="name-error" role="alert"></p><button id="name-submit" class="neon primary" type="submit"><span>Enter</span></button><button id="name-skip" class="neon secondary" type="button"><span>Skip</span></button></form></dialog><script src="leaderboard.js"></script><script src="porsche.js?v=3"></script><script src="game.js"></script></body></html>

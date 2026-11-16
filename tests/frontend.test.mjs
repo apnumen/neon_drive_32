@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import vm from 'node:vm';
+import fs from 'node:fs';
+function setup(qualified){const elements=new Map(),calls=[];const element=id=>{if(!elements.has(id))elements.set(id,{open:false,value:'',textContent:'',showModal(){this.open=true},close(){this.open=false},focus(){},replaceChildren(){},append(){}});return elements.get(id)};const ctx=vm.createContext({document:{getElementById:element,createElement:()=>({append(){}})},localStorage:{getItem(){return null},setItem(){}},crypto:{randomUUID:()=> '11111111-1111-4111-8111-111111111111'},AbortController,setTimeout,clearTimeout,mode:'over',fetch:async(url,options)=>{const data=JSON.parse(options.body);calls.push(data);return Response.json(data.action==='begin'?{token:'token'}:{qualified,score:123,entries:[]})}});vm.runInContext(fs.readFileSync('dist/leaderboard.js','utf8')+';globalThis.board=leaderboard;',ctx);return {ctx,element,calls}}
+test('name prompt only appears for a qualifying result',async()=>{for(const qualified of [false,true]){const s=setup(qualified);s.ctx.board.begin();await s.ctx.board.finish(123);assert.equal(s.element('name-dialog').open,qualified)}});
+test('leaving a run prevents its asynchronous name prompt',async()=>{const s=setup(true);s.ctx.board.begin();const pending=s.ctx.board.finish(123);s.ctx.board.cancel();await pending;assert.equal(s.element('name-dialog').open,false)});
+test('server errors never prompt for a name',async()=>{const s=setup(true);s.ctx.fetch=async()=>{throw Error('offline')};s.ctx.board.begin();await s.ctx.board.finish(123);assert.equal(s.element('name-dialog').open,false);assert.match(s.element('leaderboard-status').textContent,/offline/)});

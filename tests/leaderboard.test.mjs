@@ -1,0 +1,19 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createHandler,qualifies,maximumDistance} from '../server/leaderboard.mjs';
+class MemoryStore{
+ rows=new Map();version=0;
+ async *list({prefix}){yield {blobs:[...this.rows.keys()].filter(k=>k.startsWith(prefix)).map(key=>({key}))}}
+ async get(key){return structuredClone(this.rows.get(key)?.data??null)}
+ async getWithMetadata(key){return structuredClone(this.rows.get(key)??null)}
+ async setJSON(key,data,condition={}){const old=this.rows.get(key);if(condition.onlyIfNew&&old||condition.onlyIfMatch&&old?.etag!==condition.onlyIfMatch)return {modified:false};const etag=String(++this.version);this.rows.set(key,{data:structuredClone(data),etag});return {modified:true,etag}}
+}
+const player='11111111-1111-4111-8111-111111111111',token='22222222-2222-4222-8222-222222222222';
+function setup(){let time=0;const store=new MemoryStore(),handler=createHandler(store,{now:()=>time,uuid:()=>token});return {store,advance:ms=>time+=ms,call:async(data,origin)=>{const response=await handler(new Request('https://game.example/.netlify/functions/leaderboard',{method:data?'POST':'GET',headers:origin?{origin}:{},body:data?JSON.stringify(data):undefined}));return {status:response.status,...await response.json()}}}}
+async function candidate(s,score=100){await s.call({action:'begin',playerId:player});s.advance(20000);return s.call({action:'finish',token,score})}
+test('top ten requires a positive score, personal improvement, and strictly beating last place',()=>{const rows=Array.from({length:10},(_,i)=>({playerId:String(i),score:100+i,at:i}));assert.equal(qualifies(0,player,[]),false);assert.equal(qualifies(100,player,rows),false);assert.equal(qualifies(101,player,rows),true);assert.equal(qualifies(102,'5',rows),false);assert.equal(qualifies(106,'5',rows),true);assert.equal(maximumDistance(0),0);assert.ok(maximumDistance(71)>maximumDistance(70))});
+test('qualified result saves and appears publicly without private IDs',async()=>{const s=setup();assert.equal((await candidate(s)).qualified,true);const saved=await s.call({action:'submit',token,name:'  Лёша   32  '});assert.equal(saved.saved,true);assert.deepEqual((await s.call()).entries,[{name:'Лёша 32',score:100}]);assert.equal((await s.call({action:'submit',token,name:'again'})).status,409)});
+test('rejects impossible scores and keeps finished result immutable',async()=>{const s=setup();await s.call({action:'begin',playerId:player});assert.equal((await s.call({action:'finish',token,score:999999})).status,400);s.advance(20000);await s.call({action:'finish',token,score:100});assert.equal((await s.call({action:'finish',token,score:200})).score,100)});
+test('rechecks top ten at save time',async()=>{const s=setup();await candidate(s);for(let i=0;i<10;i++)await s.store.setJSON('entries/'+i,{playerId:String(i),name:'Driver',score:101+i,at:i});assert.equal((await s.call({action:'submit',token,name:'Late'})).status,409);assert.equal(await s.store.get('entries/'+player),null)});
+test('validates names and origin; expired runs cannot finish',async()=>{const s=setup();await candidate(s);assert.equal((await s.call({action:'submit',token,name:' '})).status,400);assert.equal((await s.call({action:'submit',token,name:'a'.repeat(21)})).status,400);assert.equal((await s.call({action:'submit',token,name:'Alex'},'https://other.example')).status,403);s.advance(86400001);assert.equal((await s.call({action:'finish',token,score:100})).status,410)});
+test('concurrent saves cannot replace a better personal score',async()=>{const s=setup();await candidate(s);const newer='33333333-3333-4333-8333-333333333333';await s.store.setJSON('results/'+newer,{playerId:player,started:0,at:20000,score:200});await Promise.all([s.call({action:'submit',token,name:'Lower'}),s.call({action:'submit',token:newer,name:'Higher'})]);assert.equal((await s.call()).entries[0].score,200)});

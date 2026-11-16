@@ -146,19 +146,30 @@ header .logo{transform:translateX(calc(-50% + 5px))}
 #player-name:focus{outline:2px solid #7fe5f3;outline-offset:2px}#name-error{color:#ffafcf;min-height:1em}
 #name-submit:disabled{opacity:.5;cursor:wait}#leaderboard-status{max-width:300px;font:13px/1.4 Arial,sans-serif;color:#d0b5cc}
 
-@font-face{font-family:NeonArcade;src:url('fonts/neon-arcade.ttf') format('truetype');font-display:swap}
-.board-dialog{background:linear-gradient(165deg,#391431dd,#110d23 62%),repeating-linear-gradient(0deg,transparent 0 3px,#ff74cf0a 3px 4px);border-top:3px solid #ff79cd;border-bottom:2px solid #68e5f0;box-shadow:0 0 32px #e42c9455,inset 0 0 28px #ff39af0c}
-.board-dialog h2{color:#f4bbec;text-shadow:2px 2px 0 #86295b,0 0 17px #ff55bc80;border-bottom:1px solid #fb7ac955;padding-bottom:18px}
+@font-face{font-family:NeonArcade;src:url('fonts/neon-arcade.ttf?v=2') format('truetype');font-display:swap}
+.board-dialog{background:linear-gradient(165deg,#391431dd,#110d23 62%),repeating-linear-gradient(0deg,transparent 0 3px,#ff74cf0a 3px 4px);border-top:3px solid #ff79cd;border-bottom:2px solid #68e5f0;border-right:2px solid #68e5f0;box-shadow:0 0 32px #e42c9455,inset 0 0 28px #ff39af0c}
+.board-dialog h2{font-family:NeonArcade,Score,sans-serif;color:#f4bbec;text-shadow:2px 2px 0 #86295b,0 0 17px #ff55bc80;border-bottom:1px solid #fb7ac955;padding-bottom:18px}
 .board-dialog table{table-layout:fixed;font:400 14px/1.5 NeonArcade,Score,sans-serif;text-transform:uppercase;letter-spacing:.3px}
 .board-dialog th{font:400 10px NeonArcade,Score,sans-serif;color:#c393b5;letter-spacing:1px;padding-bottom:14px}
 .board-dialog th:first-child{width:27px}.board-dialog th:last-child{width:88px}
 .board-dialog td{padding:13px 3px;border-bottom:1px solid #e26bba26;text-shadow:0 0 8px #ff63c644}
-.board-dialog td:first-child{font-family:AfterglowSpeed,sans-serif;font-size:13px;color:#ac83aa}
-.board-dialog td:last-child{font-family:AfterglowSpeed,sans-serif;font-size:15px;letter-spacing:0;text-transform:none;text-shadow:0 0 10px #66deed55}
-.board-dialog tbody tr:first-child{background:linear-gradient(90deg,#ff42ab22,transparent);box-shadow:inset 2px 0 #ff75c9}
+.board-dialog td:first-child{color:#ac83aa}
+.board-dialog td:last-child{text-shadow:0 0 10px #66deed55}
+.board-dialog tbody tr:first-child{background:radial-gradient(ellipse at center,#ff53b517,transparent 75%);animation:leader-glow 4s ease-in-out infinite}
 .board-dialog tbody tr:first-child td{color:#ffbbdf;text-shadow:0 0 12px #ff55ad66}
 #player-name{font-family:NeonArcade,Score,sans-serif;letter-spacing:1px}#name-limit{font-size:11px;margin:7px 0 0;color:#bd93af}
-@media(max-width:370px){.board-dialog{padding:23px 14px}.board-dialog table{font-size:12px}.board-dialog th:last-child{width:78px}.board-dialog td:last-child{font-size:13px}}
+@media(max-width:370px){.board-dialog{padding:23px 14px}.board-dialog table{font-size:12px}.board-dialog th:last-child{width:78px}}
+
+#leaderboard-dialog{padding:18px 20px;max-height:90svh}
+#leaderboard-dialog h2{font-size:23px;line-height:1.2;margin-bottom:12px;padding-bottom:12px}
+#leaderboard-dialog table{margin:8px 0 12px;line-height:1.25}
+#leaderboard-dialog th{padding:6px 3px 9px}
+#leaderboard-dialog td{padding:6px 3px;font-family:NeonArcade,Score,sans-serif;font-size:inherit;letter-spacing:.3px}
+#leaderboard-dialog .neon{margin-top:8px}
+#leaderboard-message:empty{display:none}
+@keyframes leader-glow{0%,100%{background-color:#ff59b500}50%{background-color:#ff59b50f}}
+@media(max-height:600px){#leaderboard-dialog{padding:14px 18px}#leaderboard-dialog td{padding-top:4px;padding-bottom:4px}}
+@media(prefers-reduced-motion:reduce){.board-dialog tbody tr:first-child{animation:none}}
 </style></head><body><canvas id="world" aria-label="A neon sports car driving towards a striped sunset"></canvas><div id="vignette"></div><div class="vhs" aria-hidden="true"><div class="tracking"></div></div><header><h1 class="logo" aria-label="32"><svg viewBox="-15 -20 1800 800" aria-hidden="true"><defs>
 <linearGradient id="silver32" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7fbff"/><stop offset=".18" stop-color="#b5c4d3"/><stop offset=".36" stop-color="#f4faff"/><stop offset=".47" stop-color="#8c9cab"/><stop offset=".495" stop-color="#253446"/><stop offset=".515" stop-color="#090f1b"/><stop offset=".54" stop-color="#e4f4ff"/><stop offset=".72" stop-color="#93acbe"/><stop offset=".9" stop-color="#edf8ff"/><stop offset="1" stop-color="#617a90"/></linearGradient>
 <linearGradient id="bevel32" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#c1e1f7"/><stop offset=".6" stop-color="#344657"/><stop offset="1" stop-color="#cae6fa"/></linearGradient>

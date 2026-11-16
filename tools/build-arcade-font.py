@@ -75,16 +75,23 @@ patterns[' ']=['00000']*7
 order=['.notdef']+[f'g{ord(c)}' for c in patterns];fb=FontBuilder(1000,isTTF=True);fb.setupGlyphOrder(order);fb.setupCharacterMap({ord(c):f'g{ord(c)}' for c in patterns});glyphs={};metrics={}
 for name in order:
  pen=TTGlyphPen(None);c=next((c for c in patterns if name==f'g{ord(c)}'),None)
+ rings=[]
  if c:
   for row,bits in enumerate(patterns[c]):
    for col,bit in enumerate(bits):
     if bit=='1':
      x=30+col*100;y=(6-row)*100
      pts=[(x,y),(x,y+94),(x+94,y+94),(x+94,y)]
-     pts=[(round(a+b*.10),b) for a,b in pts];pen.moveTo(pts[0])
-     for q in pts[1:]:pen.lineTo(q)
-     pen.closePath()
- glyphs[name]=pen.glyph();metrics[name]=(640 if c!=' ' else 360,0)
+     rings.append([(round(a+b*.10),b) for a,b in pts])
+ # Fit advance to actual ink, including the oblique overhang. Narrow glyphs
+ # (1, punctuation, etc.) no longer leave a phantom empty column after them.
+ left=min((x for ring in rings for x,y in ring),default=0)
+ right=max((x for ring in rings for x,y in ring),default=0)
+ for ring in rings:
+  pts=[(x-left+20,y) for x,y in ring];pen.moveTo(pts[0])
+  for q in pts[1:]:pen.lineTo(q)
+  pen.closePath()
+ glyphs[name]=pen.glyph();metrics[name]=(right-left+110,20) if rings else (360,0)
 fb.setupGlyf(glyphs);fb.setupHorizontalMetrics(metrics);fb.setupHorizontalHeader(ascent=850,descent=-150)
-fb.setupNameTable({'familyName':'Neon Arcade','styleName':'Regular','uniqueFontIdentifier':'NeonArcadeOriginal1','fullName':'Neon Arcade','psName':'NeonArcade'})
+fb.setupNameTable({'familyName':'Neon Arcade','styleName':'Regular','uniqueFontIdentifier':'NeonArcadeOriginal2','fullName':'Neon Arcade','psName':'NeonArcade'})
 fb.setupOS2(sTypoAscender=850,sTypoDescender=-150,usWinAscent=850,usWinDescent=150);fb.setupPost();fb.setupMaxp();fb.save('dist/fonts/neon-arcade.ttf')

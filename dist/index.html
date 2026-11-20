@@ -133,7 +133,12 @@ dialog#album .primary{min-height:48px;height:48px;--cut:11px}
   background: radial-gradient(ellipse at center, #32142e 0%, #170c25 55%, #0b0715 100%);
 }
 #welcome:active { transform: none; }
-#welcome:focus-visible { outline-offset: -8px; }
+#welcome:focus-visible { outline: none; }
+#welcome:focus-visible .welcome-hand {
+  outline: 2px solid #ffe2f7;
+  outline-offset: 6px;
+  border-radius: 8px;
+}
 .welcome-logo {
   width: min(68vw, 290px, 55vh);
   height: auto;
@@ -149,7 +154,7 @@ dialog#album .primary{min-height:48px;height:48px;--cut:11px}
   filter: drop-shadow(0 0 9px #ff48b6);
 }
 </style></head><body>
-<button type="button" id="welcome" aria-label="32 — Enter and play music" autofocus>
+<button type="button" id="welcome" aria-label="32 — Enter and play music">
   <svg class="welcome-logo" viewBox="-15 -20 1800 800" aria-hidden="true"><use href="#logo32-art"/></svg>
   <svg class="welcome-hand" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M20 29V15a3 3 0 0 1 6 0v10a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v5c0 6-4 10-10 10h-6c-4 0-7-2-9-5l-5-7a3 3 0 0 1 5-4l1 1Z" fill="#22102d"/>

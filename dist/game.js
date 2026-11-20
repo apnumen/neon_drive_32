@@ -308,10 +308,10 @@ function syncMusic(){
  const selected=musicScene==='race'?tracks.race:tracks.menu;
  const source=musicScene==='race'?racePlaylist[lastRace]:MENU_TRACK;
  if(!source)return;
- function failed(){if(token!==musicToken)return;muted=true;$('sound').removeAttribute('aria-busy');soundLabel();for(const track of Object.values(tracks))track.pause()}
+ function failed(){if(token!==musicToken)return;muted=true;soundLabel();for(const track of Object.values(tracks))track.pause()}
  function ready(url){
   if(token!==musicToken||muted||document.hidden)return;
-  soundLabel();$('sound').removeAttribute('aria-busy');
+  soundLabel();
   if(selected.getAttribute('src')!==url)selected.src=url;
   const initial=new Map(Object.values(tracks).map(t=>[t,t.volume]));
   selected.play().catch(failed);
@@ -327,7 +327,10 @@ function syncMusic(){
  }
  const cached=memoryTrack(source);
  if(typeof cached==='string')ready(cached);
- else{$('sound').textContent='…';$('sound').setAttribute('aria-label','Loading music');$('sound').setAttribute('aria-busy','true');cached.then(ready).catch(failed);}
+ else{
+  $('sound').setAttribute('aria-busy','true');
+  cached.then(ready).catch(failed);
+ }
 }
 // Warm only menu audio. Race songs download on demand, once per page session.
 memoryTrack(MENU_TRACK).catch(()=>{});

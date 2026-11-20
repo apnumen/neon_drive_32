@@ -13,7 +13,7 @@ header .logo{position:absolute;left:50%;top:0;margin:0;width:164px;height:82px;t
 .logo svg{display:block;width:100%;height:100%;overflow:visible}
 .utilities{position:absolute;right:-8px;top:4px;display:flex;flex-direction:column;gap:10px;pointer-events:auto}
 .utility{display:grid;place-items:center;width:42px;height:42px;min-height:42px;padding:0;border:1px solid #9a588775;border-radius:0;background:#140c2380;color:#d6aaca;font:20px monospace;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px)}
-#landing{display:flex;align-items:center;flex-direction:column;gap:16px;bottom:max(38px,env(safe-area-inset-bottom))}
+#landing{display:flex;align-items:center;flex-direction:column;gap:22px;bottom:max(38px,env(safe-area-inset-bottom))}
 .neon,#controls button,#stop{--edge:#ff4cbd;--shine:#ffc0e9;--cut:13px;position:relative;isolation:isolate;display:grid;place-items:center;background:transparent;border:0;border-radius:0;box-shadow:none;min-height:56px;padding:0 28px;color:#fff0fb;font-family:monospace;font-size:15px;font-weight:600;letter-spacing:4px;text-transform:uppercase;filter:drop-shadow(0 0 6px #ff34a655);transition:filter .16s,transform .12s}
 .neon:before,.neon:after{content:"";position:absolute;z-index:-1;pointer-events:none;clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
 .neon:before{inset:0;background:linear-gradient(125deg,var(--shine),var(--edge) 25%,#752956 56%,var(--edge) 80%,var(--shine))}
@@ -24,7 +24,8 @@ header .logo{position:absolute;left:50%;top:0;margin:0;width:164px;height:82px;t
 .neon:active{transform:translateY(2px);filter:drop-shadow(0 0 18px var(--edge))}
 .neon:active:after{background:#44203f}
 .neon:focus-visible{outline:2px solid #fff0fb;outline-offset:5px}
-#start{width:min(100%,320px);height:66px;font-size:19px;letter-spacing:6px}
+#landing :is(#start,.album){width:min(100%,320px);height:66px}
+#start{font-size:19px;letter-spacing:6px}
 #start svg{width:23px;height:23px;fill:#ffb3e0}
 .neon.secondary{--edge:#48dbe9;--shine:#b1f6ff;width:min(100%,270px);min-height:50px;height:50px;margin:0;font-size:12px;letter-spacing:3px;filter:drop-shadow(0 0 5px #33c9e53d);color:#b7eef5}
 .neon.secondary:after{background:linear-gradient(170deg,#112531,#0c101f 70%)}
@@ -39,7 +40,7 @@ header .logo{position:absolute;left:50%;top:0;margin:0;width:164px;height:82px;t
 #result .primary{max-width:320px}dialog .primary{height:54px}
 dialog{border-radius:0;background:#110e23;border-color:#ff66c6;box-shadow:0 0 35px #c83b8640}
 @media(max-width:359px){header .logo{width:140px}.utilities{right:-9px}}
-@media(max-height:600px){header .logo{width:128px;height:64px}#landing{gap:10px;bottom:20px}#start{height:54px}.neon.secondary{height:44px;min-height:44px}}
+@media(max-height:600px){header .logo{width:128px;height:64px}#landing{gap:14px;bottom:20px}#landing :is(#start,.album){height:54px}.neon.secondary{height:44px;min-height:44px}}
 @media(prefers-reduced-motion:reduce){.neon{transition:none}}
 
 
@@ -66,6 +67,20 @@ header .logo{width:186px;height:93px;filter:drop-shadow(0 2px 0 #8c125a) drop-sh
 #start svg{fill:#ffc4ea;filter:drop-shadow(0 0 5px #ff2fbb)}
 .neon.secondary{--edge:#f55cc3;--shine:#ffbde9;color:#f8acd9;filter:drop-shadow(0 0 7px #ff2cb54d);font-size:17px}
 .neon.secondary:after{background:linear-gradient(170deg,#31102f,#130d22 70%)}
+#landing .album {
+  --edge: #44e1ed;
+  --shine: #d3fcff;
+  color: #c6faff;
+  font-size: 23px;
+  filter: drop-shadow(0 0 8px #35d6ea55);
+}
+#landing .album:before {
+  background: linear-gradient(125deg,var(--shine),var(--edge) 25%,#217684 56%,var(--edge) 80%,var(--shine));
+}
+#landing .album:after {
+  background: linear-gradient(170deg,#17424c,#0d1827 70%);
+  box-shadow: inset 0 0 22px #35d6ea22;
+}
 #retry{font-size:20px;letter-spacing:0}#home,#close{font-family:Afterglow,sans-serif;font-size:15px;letter-spacing:0}
 #stop span{font-size:10px}
 #controls button span{font-family:Arial,sans-serif}
@@ -215,7 +230,7 @@ header .logo{transform:translateX(calc(-50% + 5px))}
 <linearGradient id="bevel32" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#c1e1f7"/><stop offset=".6" stop-color="#344657"/><stop offset="1" stop-color="#cae6fa"/></linearGradient>
 </defs><g id="logo32-art"><g transform="translate(0 725) scale(1 -1)"><g fill="#172c40" stroke="#090e1d" stroke-width="26" stroke-linejoin="bevel" transform="translate(9 -23)"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g><g fill="url(#silver32)" stroke="url(#bevel32)" stroke-width="13" stroke-linejoin="bevel"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g></g>
 <path d="M620 118h36m-18-18v36" stroke="#e6f8ff" stroke-width="5" opacity=".85"/></g></svg></h1><div class="utilities"><button class="utility sound" id="sound" aria-label="Turn music on" title="Music">♫</button><button id="leaderboard-open" class="utility" aria-label="Leaderboard" title="Leaderboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v6a5 5 0 0 1-10 0z M7 5H3v3a4 4 0 0 0 5 4 M17 5h4v3a4 4 0 0 1-5 4 M12 14v6 M8 21h8"/></svg></button><button id="stop" hidden class="neon"><span><i class="stop-mark" aria-hidden="true">Ⅱ</i><b>Stop</b></span></button></div></header><main id="landing"><button id="start" class="neon primary"><span><b>Start</b></span></button><button class="neon secondary album"><span><b>Photos</b></span></button></main><aside id="hud" hidden><div id="distance" aria-label="Distance in metres">00000</div></aside><nav id="controls" aria-label="Driving controls" hidden><button id="left" class="neon" aria-label="Move left"><span>←</span></button><div id="speedometer" aria-label="Speed 60 miles per hour"><svg viewBox="0 0 100 42" aria-hidden="true"><path class="speed-track" d="M8 36A43 43 0 0 1 92 36"/><path id="speed-arc" d="M8 36A43 43 0 0 1 92 36" pathLength="100"/></svg><div class="speed-reading"><strong id="speed-value">60</strong><span>MPH</span></div></div><button id="right" class="neon" aria-label="Move right"><span>→</span></button></nav><div id="result" hidden><section aria-label="Ride result"><strong id="score"><span class="score-value">0</span><span class="score-unit">m</span></strong><p id="best"></p><p id="leaderboard-status" role="status" hidden></p><button class="neon primary" id="retry"><span><b>Try again</b></span></button><button class="neon secondary" id="home"><span>Back</span></button></section></div><div id="device"><section id="rotate"><div style="font-size:50px">↻</div><h2>Keep it vertical.</h2><p>Rotate your phone to chase the sunset.</p></section></div><dialog id="album" aria-labelledby="album-title"><h2 id="album-title">Coming Soon</h2><button class="neon primary" id="close"><span>Back</span></button></dialog><dialog id="leaderboard-dialog" class="board-dialog" aria-labelledby="board-title"><h2 id="board-title">TOP 10</h2><p id="leaderboard-message" role="status"></p><table><thead><tr><th scope="col">#</th><th scope="col">Driver</th><th scope="col">Score</th></tr></thead><tbody id="leaderboard-rows"></tbody></table><button class="neon secondary" id="leaderboard-close"><span>Back</span></button></dialog><dialog id="name-dialog" class="board-dialog" aria-labelledby="name-title"><h2 id="name-title">TOP 10</h2><p>Your ride made the leaderboard.</p><strong id="name-score"></strong><form id="name-form"><label for="player-name">Your name</label><input id="player-name" name="name" maxlength="20" autocomplete="nickname" aria-describedby="name-limit" required><p id="name-limit">Up to 10 characters</p><p id="name-error" role="alert"></p><button id="name-submit" class="neon primary" type="submit"><span>OK</span></button><button id="name-skip" class="neon secondary" type="button"><span>Skip</span></button></form></dialog></div>
-<script src="leaderboard.js"></script><script src="porsche.js?v=3"></script><script src="game.js"></script>
+<script src="leaderboard.js"></script><script src="porsche.js?v=3"></script><script src="game.js?v=2"></script>
 <script>
 {
   const welcome = document.getElementById('welcome');

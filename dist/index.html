@@ -188,7 +188,7 @@ header .logo{transform:translateX(calc(-50% + 5px))}
   position: fixed;
   inset: 0;
   z-index: 99;
-  display: grid;
+  display: none;
   place-items: center;
   width: 100%;
   height: 100%;
@@ -196,6 +196,10 @@ header .logo{transform:translateX(calc(-50% + 5px))}
   border: 0;
   background: radial-gradient(ellipse at center, #32142e 0%, #170c25 55%, #0b0715 100%);
 }
+.show-welcome #welcome { display: grid; }
+.show-welcome #drive { visibility: hidden; }
+.show-welcome #drive > .vhs { visibility: visible; }
+#welcome:disabled { cursor: wait; }
 #welcome:active { transform: none; }
 #welcome:focus-visible { outline: none; }
 #welcome:focus-visible .welcome-hand {
@@ -217,8 +221,36 @@ header .logo{transform:translateX(calc(-50% + 5px))}
   color: #ffe2f7;
   filter: drop-shadow(0 0 9px #ff48b6);
 }
-</style></head><body>
-<button type="button" id="welcome" hidden aria-label="32 — Enter and play music">
+</style>
+<script>
+{
+  const page = document.documentElement;
+  page.classList.add('show-welcome');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const welcome = document.getElementById('welcome');
+    const drive = document.getElementById('drive');
+    const start = document.getElementById('start');
+    const sound = document.getElementById('sound');
+
+    if (typeof start.onclick !== 'function' || typeof sound.onclick !== 'function') {
+      page.classList.remove('show-welcome');
+      return;
+    }
+
+    welcome.addEventListener('click', () => {
+      page.classList.remove('show-welcome');
+      drive.inert = false;
+      start.focus({preventScroll: true});
+      sound.click();
+    }, {once: true});
+    drive.inert = true;
+    welcome.disabled = false;
+  }, {once: true});
+}
+</script>
+</head><body>
+<button type="button" id="welcome" disabled aria-label="32 — Enter and play music">
   <svg class="welcome-logo" viewBox="-15 -20 1800 800" aria-hidden="true"><use href="#logo32-art"/></svg>
   <svg class="welcome-hand" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M20 29V15a3 3 0 0 1 6 0v10a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v5c0 6-4 10-10 10h-6c-4 0-7-2-9-5l-5-7a3 3 0 0 1 5-4l1 1Z" fill="#22102d"/>
@@ -231,23 +263,4 @@ header .logo{transform:translateX(calc(-50% + 5px))}
 </defs><g id="logo32-art"><g transform="translate(0 725) scale(1 -1)"><g fill="#172c40" stroke="#090e1d" stroke-width="26" stroke-linejoin="bevel" transform="translate(9 -23)"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g><g fill="url(#silver32)" stroke="url(#bevel32)" stroke-width="13" stroke-linejoin="bevel"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g></g>
 <path d="M620 118h36m-18-18v36" stroke="#e6f8ff" stroke-width="5" opacity=".85"/></g></svg></h1><div class="utilities"><button class="utility sound" id="sound" aria-label="Turn music on" title="Music">♫</button><button id="leaderboard-open" class="utility" aria-label="Leaderboard" title="Leaderboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v6a5 5 0 0 1-10 0z M7 5H3v3a4 4 0 0 0 5 4 M17 5h4v3a4 4 0 0 1-5 4 M12 14v6 M8 21h8"/></svg></button><button id="stop" hidden class="neon"><span><i class="stop-mark" aria-hidden="true">Ⅱ</i><b>Stop</b></span></button></div></header><main id="landing"><button id="start" class="neon primary"><span><b>Start</b></span></button><button class="neon secondary album"><span><b>Photos</b></span></button></main><aside id="hud" hidden><div id="distance" aria-label="Distance in metres">00000</div></aside><nav id="controls" aria-label="Driving controls" hidden><button id="left" class="neon" aria-label="Move left"><span>←</span></button><div id="speedometer" aria-label="Speed 60 miles per hour"><svg viewBox="0 0 100 42" aria-hidden="true"><path class="speed-track" d="M8 36A43 43 0 0 1 92 36"/><path id="speed-arc" d="M8 36A43 43 0 0 1 92 36" pathLength="100"/></svg><div class="speed-reading"><strong id="speed-value">60</strong><span>MPH</span></div></div><button id="right" class="neon" aria-label="Move right"><span>→</span></button></nav><div id="result" hidden><section aria-label="Ride result"><strong id="score"><span class="score-value">0</span><span class="score-unit">m</span></strong><p id="best"></p><p id="leaderboard-status" role="status" hidden></p><button class="neon primary" id="retry"><span><b>Try again</b></span></button><button class="neon secondary" id="home"><span>Back</span></button></section></div><div id="device"><section id="rotate"><div style="font-size:50px">↻</div><h2>Keep it vertical.</h2><p>Rotate your phone to chase the sunset.</p></section></div><dialog id="album" aria-labelledby="album-title"><h2 id="album-title">Coming Soon</h2><button class="neon primary" id="close"><span>Back</span></button></dialog><dialog id="leaderboard-dialog" class="board-dialog" aria-labelledby="board-title"><h2 id="board-title">TOP 10</h2><p id="leaderboard-message" role="status"></p><table><thead><tr><th scope="col">#</th><th scope="col">Driver</th><th scope="col">Score</th></tr></thead><tbody id="leaderboard-rows"></tbody></table><button class="neon secondary" id="leaderboard-close"><span>Back</span></button></dialog><dialog id="name-dialog" class="board-dialog" aria-labelledby="name-title"><h2 id="name-title">TOP 10</h2><p>Your ride made the leaderboard.</p><strong id="name-score"></strong><form id="name-form"><label for="player-name">Your name</label><input id="player-name" name="name" maxlength="20" autocomplete="nickname" aria-describedby="name-limit" required><p id="name-limit">Up to 10 characters</p><p id="name-error" role="alert"></p><button id="name-submit" class="neon primary" type="submit"><span>OK</span></button><button id="name-skip" class="neon secondary" type="button"><span>Skip</span></button></form></dialog></div>
 <script src="leaderboard.js"></script><script src="porsche.js?v=3"></script><script src="game.js?v=2"></script>
-<script>
-{
-  const welcome = document.getElementById('welcome');
-  const drive = document.getElementById('drive');
-  const startButton = document.getElementById('start');
-  const soundButton = document.getElementById('sound');
-
-  if (typeof startButton.onclick === 'function' && typeof soundButton.onclick === 'function') {
-    welcome.addEventListener('click', () => {
-      welcome.hidden = true;
-      drive.inert = false;
-      startButton.focus({preventScroll: true});
-      soundButton.click();
-    }, {once: true});
-    drive.inert = true;
-    welcome.hidden = false;
-  }
-}
-</script>
 </body></html>

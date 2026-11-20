@@ -120,6 +120,55 @@ dialog#album .primary{min-height:48px;height:48px;--cut:11px}
 #result .score-value,#result .best-value{font-family:AfterglowSpeed,sans-serif;font-variant-numeric:normal;letter-spacing:0;font-weight:400}
 #result .score-value{padding:4px 0;white-space:nowrap}
 
+/* Stable small viewport prevents road jumps when mobile browser bars collapse. */
+#world{height:100svh;filter:none}
+.vhs:before{inset:0;background-image:url('assets/grain.png');opacity:.22;animation:none}
+.tracking{top:0;will-change:transform;animation:tracking-smooth 11s linear infinite}
+@keyframes tracking-smooth{from{transform:translateY(-65px)}to{transform:translateY(100svh)}}
+@media(pointer:coarse){header .logo{width:126px;height:58px}.vhs{opacity:.26}}
+@media(prefers-reduced-motion:reduce){.tracking{animation:none}}
+
+/* Optical correction for the right-leaning chrome numerals. */
+header .logo{transform:translateX(calc(-50% + 5px))}
+
+#leaderboard-open{right:0;left:auto;top:52px}
+#leaderboard-open svg{width:23px;height:23px;fill:none;stroke:#f7b4df;stroke-width:1.5;stroke-linejoin:round}
+.board-dialog{width:min(390px,calc(100vw - 32px));max-width:none;max-height:80svh;overflow:auto;padding:26px 22px;border:1px solid #ff82ce;background:linear-gradient(150deg,#30142f,#110e23 60%);box-shadow:0 0 32px #e42c9440}
+.board-dialog h2{font:400 25px Afterglow,sans-serif;color:#ffc3e8;letter-spacing:0;margin:0 0 20px}
+.board-dialog p{font:14px/1.5 Arial,sans-serif;margin:12px 0;color:#d4b5cf}
+.board-dialog table{width:100%;border-collapse:collapse;font:15px/1.4 Arial,sans-serif;text-align:left;margin:14px 0 20px}
+.board-dialog th{font-size:12px;color:#b78ba9;font-weight:400}.board-dialog th,.board-dialog td{padding:10px 4px;border-bottom:1px solid #dd6db52a;overflow-wrap:anywhere}
+.board-dialog th:last-child,.board-dialog td:last-child{text-align:right;white-space:nowrap;color:#aeeff7;font-variant-numeric:tabular-nums}
+.board-dialog tr:first-child td{color:#ffc0e6}.board-dialog .neon{margin:12px auto 0;max-width:100%;font:400 14px Afterglow,sans-serif;letter-spacing:0}
+#name-score{font:400 26px AfterglowSpeed,sans-serif;color:#b5f7ff;display:block;margin:18px 0}
+#name-form label{display:block;text-align:left;font:14px Arial,sans-serif;margin-bottom:8px}
+#player-name{width:100%;padding:13px 12px;border:1px solid #c76fa6;border-radius:0;background:#110d21;color:#fff0f9;font:16px Arial,sans-serif}
+#player-name:focus{outline:2px solid #7fe5f3;outline-offset:2px}#name-error{color:#ffafcf;min-height:1em}
+#name-submit:disabled{opacity:.5;cursor:wait}#leaderboard-status{max-width:300px;font:13px/1.4 Arial,sans-serif;color:#d0b5cc}
+
+@font-face{font-family:NeonArcade;src:url('fonts/neon-arcade.ttf?v=2') format('truetype');font-display:swap}
+.board-dialog{background:linear-gradient(165deg,#391431dd,#110d23 62%),repeating-linear-gradient(0deg,transparent 0 3px,#ff74cf0a 3px 4px);border-top:3px solid #ff79cd;border-bottom:2px solid #68e5f0;border-right:2px solid #68e5f0;box-shadow:0 0 32px #e42c9455,inset 0 0 28px #ff39af0c}
+.board-dialog h2{font-family:NeonArcade,Score,sans-serif;color:#f4bbec;text-shadow:2px 2px 0 #86295b,0 0 17px #ff55bc80;border-bottom:1px solid #fb7ac955;padding-bottom:18px}
+.board-dialog table{table-layout:fixed;font:400 14px/1.5 NeonArcade,Score,sans-serif;text-transform:uppercase;letter-spacing:.3px}
+.board-dialog th{font:400 10px NeonArcade,Score,sans-serif;color:#c393b5;letter-spacing:1px;padding-bottom:14px}
+.board-dialog th:first-child{width:27px}.board-dialog th:last-child{width:88px}
+.board-dialog td{padding:13px 3px;border-bottom:1px solid #e26bba26;text-shadow:0 0 8px #ff63c644}
+.board-dialog td:first-child{color:#ac83aa}
+.board-dialog td:last-child{text-shadow:0 0 10px #66deed55}
+.board-dialog tbody tr:first-child{background:linear-gradient(90deg,transparent 0%,#ff53b51a 35%,#ff53b51a 65%,transparent 100%)}
+.board-dialog tbody tr:first-child td{color:#ffbbdf;text-shadow:0 0 12px #ff55ad66}
+#player-name{font-family:NeonArcade,Score,sans-serif;letter-spacing:1px}#name-limit{font-size:11px;margin:7px 0 0;color:#bd93af}
+@media(max-width:370px){.board-dialog{padding:23px 14px}.board-dialog table{font-size:12px}.board-dialog th:last-child{width:78px}}
+
+#leaderboard-dialog{padding:18px 20px;max-height:90svh}
+#leaderboard-dialog h2{font-size:23px;line-height:1.2;margin-bottom:12px;padding-bottom:12px}
+#leaderboard-dialog table{margin:8px 0 12px;line-height:1.25}
+#leaderboard-dialog th{padding:6px 3px 9px}
+#leaderboard-dialog td{padding:6px 3px;font-family:NeonArcade,Score,sans-serif;font-size:inherit;letter-spacing:.3px}
+#leaderboard-dialog .neon{margin-top:8px}
+#leaderboard-message:empty{display:none}
+@media(max-height:600px){#leaderboard-dialog{padding:14px 18px}#leaderboard-dialog td{padding-top:4px;padding-bottom:4px}}
+
 #welcome {
   position: fixed;
   inset: 0;
@@ -154,25 +203,36 @@ dialog#album .primary{min-height:48px;height:48px;--cut:11px}
   filter: drop-shadow(0 0 9px #ff48b6);
 }
 </style></head><body>
-<button type="button" id="welcome" aria-label="32 — Enter and play music">
+<button type="button" id="welcome" hidden aria-label="32 — Enter and play music">
   <svg class="welcome-logo" viewBox="-15 -20 1800 800" aria-hidden="true"><use href="#logo32-art"/></svg>
   <svg class="welcome-hand" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M20 29V15a3 3 0 0 1 6 0v10a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v2a3 3 0 0 1 6 0v5c0 6-4 10-10 10h-6c-4 0-7-2-9-5l-5-7a3 3 0 0 1 5-4l1 1Z" fill="#22102d"/>
     <path d="M23 3v4M13 7l3 3M33 7l-3 3"/>
   </svg>
 </button>
-<div id="drive" inert><canvas id="world" aria-label="A neon sports car driving towards a striped sunset"></canvas><div id="vignette"></div><div class="vhs" aria-hidden="true"><div class="tracking"></div></div><header><h1 class="logo" aria-label="32"><svg viewBox="-15 -20 1800 800" aria-hidden="true"><defs>
+<div id="drive"><canvas id="world" aria-label="A neon sports car driving towards a striped sunset"></canvas><div id="vignette"></div><div class="vhs" aria-hidden="true"><div class="tracking"></div></div><header><h1 class="logo" aria-label="32"><svg viewBox="-15 -20 1800 800" aria-hidden="true"><defs>
 <linearGradient id="silver32" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7fbff"/><stop offset=".18" stop-color="#b5c4d3"/><stop offset=".36" stop-color="#f4faff"/><stop offset=".47" stop-color="#8c9cab"/><stop offset=".495" stop-color="#253446"/><stop offset=".515" stop-color="#090f1b"/><stop offset=".54" stop-color="#e4f4ff"/><stop offset=".72" stop-color="#93acbe"/><stop offset=".9" stop-color="#edf8ff"/><stop offset="1" stop-color="#617a90"/></linearGradient>
 <linearGradient id="bevel32" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#c1e1f7"/><stop offset=".6" stop-color="#344657"/><stop offset="1" stop-color="#cae6fa"/></linearGradient>
 </defs><g id="logo32-art"><g transform="translate(0 725) scale(1 -1)"><g fill="#172c40" stroke="#090e1d" stroke-width="26" stroke-linejoin="bevel" transform="translate(9 -23)"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g><g fill="url(#silver32)" stroke="url(#bevel32)" stroke-width="13" stroke-linejoin="bevel"><path d="M30 150H560L585 275H235L265 425H615L640 550H110L140 700H740L820 600L786 430L685 350L754 270L720 100L600 0H0Z" transform="translate(0 0)"/><path d="M140 700H740L820 600L782 410L210 150H730L700 0H0L48 240L630 500L640 550H280L260 450H90Z" transform="translate(870 0)"/></g></g>
-<path d="M620 118h36m-18-18v36" stroke="#e6f8ff" stroke-width="5" opacity=".85"/></g></svg></h1><div class="utilities"><button class="utility sound" id="sound" aria-label="Turn music on" title="Music">♫</button><button id="stop" hidden class="neon"><span><i class="stop-mark" aria-hidden="true">Ⅱ</i><b>Stop</b></span></button></div></header><main id="landing"><button id="start" class="neon primary"><span><b>Start</b></span></button><button class="neon secondary album"><span><b>Photos</b></span></button></main><aside id="hud" hidden><div id="distance" aria-label="Distance in metres">00000</div></aside><nav id="controls" aria-label="Driving controls" hidden><button id="left" class="neon" aria-label="Move left"><span>←</span></button><div id="speedometer" aria-label="Speed 60 miles per hour"><svg viewBox="0 0 100 42" aria-hidden="true"><path class="speed-track" d="M8 36A43 43 0 0 1 92 36"/><path id="speed-arc" d="M8 36A43 43 0 0 1 92 36" pathLength="100"/></svg><div class="speed-reading"><strong id="speed-value">60</strong><span>MPH</span></div></div><button id="right" class="neon" aria-label="Move right"><span>→</span></button></nav><div id="result" hidden><section aria-label="Ride result"><strong id="score"><span class="score-value">0</span><span class="score-unit">m</span></strong><p id="best"></p><button class="neon primary" id="retry"><span><b>Try again</b></span></button><button class="neon secondary" id="home"><span>Back</span></button></section></div><div id="device"><section id="rotate"><div style="font-size:50px">↻</div><h2>Keep it vertical.</h2><p>Rotate your phone to chase the sunset.</p></section></div><dialog id="album" aria-labelledby="album-title"><h2 id="album-title">Coming Soon</h2><button class="neon primary" id="close"><span>Back</span></button></dialog></div>
-<script src="porsche.js?v=3"></script><script src="game.js"></script>
+<path d="M620 118h36m-18-18v36" stroke="#e6f8ff" stroke-width="5" opacity=".85"/></g></svg></h1><div class="utilities"><button class="utility sound" id="sound" aria-label="Turn music on" title="Music">♫</button><button id="leaderboard-open" class="utility" aria-label="Leaderboard" title="Leaderboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v6a5 5 0 0 1-10 0z M7 5H3v3a4 4 0 0 0 5 4 M17 5h4v3a4 4 0 0 1-5 4 M12 14v6 M8 21h8"/></svg></button><button id="stop" hidden class="neon"><span><i class="stop-mark" aria-hidden="true">Ⅱ</i><b>Stop</b></span></button></div></header><main id="landing"><button id="start" class="neon primary"><span><b>Start</b></span></button><button class="neon secondary album"><span><b>Photos</b></span></button></main><aside id="hud" hidden><div id="distance" aria-label="Distance in metres">00000</div></aside><nav id="controls" aria-label="Driving controls" hidden><button id="left" class="neon" aria-label="Move left"><span>←</span></button><div id="speedometer" aria-label="Speed 60 miles per hour"><svg viewBox="0 0 100 42" aria-hidden="true"><path class="speed-track" d="M8 36A43 43 0 0 1 92 36"/><path id="speed-arc" d="M8 36A43 43 0 0 1 92 36" pathLength="100"/></svg><div class="speed-reading"><strong id="speed-value">60</strong><span>MPH</span></div></div><button id="right" class="neon" aria-label="Move right"><span>→</span></button></nav><div id="result" hidden><section aria-label="Ride result"><strong id="score"><span class="score-value">0</span><span class="score-unit">m</span></strong><p id="best"></p><p id="leaderboard-status" role="status" hidden></p><button class="neon primary" id="retry"><span><b>Try again</b></span></button><button class="neon secondary" id="home"><span>Back</span></button></section></div><div id="device"><section id="rotate"><div style="font-size:50px">↻</div><h2>Keep it vertical.</h2><p>Rotate your phone to chase the sunset.</p></section></div><dialog id="album" aria-labelledby="album-title"><h2 id="album-title">Coming Soon</h2><button class="neon primary" id="close"><span>Back</span></button></dialog><dialog id="leaderboard-dialog" class="board-dialog" aria-labelledby="board-title"><h2 id="board-title">TOP 10</h2><p id="leaderboard-message" role="status"></p><table><thead><tr><th scope="col">#</th><th scope="col">Driver</th><th scope="col">Score</th></tr></thead><tbody id="leaderboard-rows"></tbody></table><button class="neon secondary" id="leaderboard-close"><span>Back</span></button></dialog><dialog id="name-dialog" class="board-dialog" aria-labelledby="name-title"><h2 id="name-title">TOP 10</h2><p>Your ride made the leaderboard.</p><strong id="name-score"></strong><form id="name-form"><label for="player-name">Your name</label><input id="player-name" name="name" maxlength="20" autocomplete="nickname" aria-describedby="name-limit" required><p id="name-limit">Up to 10 characters</p><p id="name-error" role="alert"></p><button id="name-submit" class="neon primary" type="submit"><span>OK</span></button><button id="name-skip" class="neon secondary" type="button"><span>Skip</span></button></form></dialog></div>
+<script src="leaderboard.js"></script><script src="porsche.js?v=3"></script><script src="game.js"></script>
 <script>
-const welcome = document.getElementById('welcome');
-welcome.addEventListener('click', () => {
-  toggleSound();
-  welcome.hidden = true;
-  document.getElementById('drive').inert = false;
-  document.getElementById('start').focus({preventScroll: true});
-}, {once: true});
-</script></body></html>
+{
+  const welcome = document.getElementById('welcome');
+  const drive = document.getElementById('drive');
+  const startButton = document.getElementById('start');
+  const soundButton = document.getElementById('sound');
+
+  if (typeof startButton.onclick === 'function' && typeof soundButton.onclick === 'function') {
+    welcome.addEventListener('click', () => {
+      welcome.hidden = true;
+      drive.inert = false;
+      startButton.focus({preventScroll: true});
+      soundButton.click();
+    }, {once: true});
+    drive.inert = true;
+    welcome.hidden = false;
+  }
+}
+</script>
+</body></html>
